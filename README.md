@@ -1,5 +1,5 @@
 # Classic Computer Science Problems in Java
-This repository contains source code to accompany the forthcoming book *Classic Computer Science Problems in Java* by David Kopec. You will find the source organized by chapter. **As you read the book, each code listing contains a file name that corresponds to a file in this repository.**
+This repository contains source code to accompany the forthcoming book *Classic Computer Science Problems in Java* by David Kopec. You will find the source organized by chapter. **As you read the book, each code listing contains a file name that corresponds to a file in this repository.** The book is due for publication in late 2020.
 
 ## License
 All of the source code in this repository is released under the Apache License version 2.0. See `LICENSE`.
