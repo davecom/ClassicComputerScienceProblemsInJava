@@ -69,5 +69,4 @@ public class QueensConstraint extends Constraint<Integer, Integer> {
 			System.out.println(solution);
 		}
 	}
-
 }
