@@ -1,7 +1,13 @@
 package chapter4;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.function.IntConsumer;
 
 public class WeightedGraph<V> extends Graph<V, WeightedEdge> {
 
@@ -36,6 +42,138 @@ public class WeightedGraph<V> extends Graph<V, WeightedEdge> {
 			sb.append(System.lineSeparator());
 		}
 		return sb.toString();
+	}
+
+	public static double totalWeight(List<WeightedEdge> path) {
+		return path.stream().mapToDouble(we -> we.weight).sum();
+	}
+
+	// Find the minimum-spanning tree of this graph using Jarnik's algorithm
+	// *start* is the vertex index to start the search at
+	public List<WeightedEdge> mst(int start) {
+		LinkedList<WeightedEdge> result = new LinkedList<>(); // final mst
+		PriorityQueue<WeightedEdge> pq = new PriorityQueue();
+		boolean[] visited = new boolean[getVertexCount()]; // where we've been
+
+		// this is like a "visit" inner function
+		IntConsumer visit = index -> {
+			visited[index] = true; // mark as visited
+			for (WeightedEdge edge : edgesOf(index)) {
+				// add all edges coming from here to pq
+				if (!visited[edge.v]) {
+					pq.offer(edge);
+				}
+			}
+		};
+
+		visit.accept(start); // the first vertex is where everything begins
+		while (!pq.isEmpty()) { // keep going while there are edges to process
+			WeightedEdge edge = pq.poll();
+			if (visited[edge.v]) {
+				continue; // don't ever revisit
+			}
+			// this is the current smallest, so add it to solution
+			result.add(edge);
+			visit.accept(edge.v); // visit where this connects
+		}
+
+		return result;
+	}
+
+	public void printWeightedPath(List<WeightedEdge> wp) {
+		for (WeightedEdge edge : wp) {
+			System.out.println(vertexAt(edge.u) + " " + edge.weight + "> " + vertexAt(edge.v));
+		}
+		System.out.println("Total Weight: " + totalWeight(wp));
+	}
+
+	public static final class DijkstraNode implements Comparable<DijkstraNode> {
+		public final int vertex;
+		public final double distance;
+
+		public DijkstraNode(int vertex, double distance) {
+			this.vertex = vertex;
+			this.distance = distance;
+		}
+
+		@Override
+		public int compareTo(DijkstraNode other) {
+			Double mine = distance;
+			Double theirs = other.distance;
+			return mine.compareTo(theirs);
+		}
+	}
+
+	public static final class DijkstraResult {
+		public final double[] distances;
+		public final Map<Integer, WeightedEdge> pathMap;
+
+		public DijkstraResult(double[] distances, Map<Integer, WeightedEdge> pathMap) {
+			this.distances = distances;
+			this.pathMap = pathMap;
+		}
+	}
+
+	public DijkstraResult dijkstra(V root) {
+		int first = indexOf(root); // find starting index
+		// distances are unknown at first
+		double[] distances = new double[getVertexCount()];
+		distances[first] = 0; // root's distance to root is 0
+		boolean[] visited = new boolean[getVertexCount()]; // where we've been
+		visited[first] = true;
+		// how we got to each vertex
+		HashMap<Integer, WeightedEdge> pathMap = new HashMap<>();
+		PriorityQueue<DijkstraNode> pq = new PriorityQueue<>();
+		pq.offer(new DijkstraNode(first, 0));
+
+		while (!pq.isEmpty()) {
+			int u = pq.poll().vertex; // explore the next closest vertex
+			double distU = distances[u]; // should already have seen it
+			// look at every edge/vertex from the vertex in question
+			for (WeightedEdge we : edgesOf(u)) {
+				// the old distance to this vertex
+				double distV = distances[we.v];
+				double pathWeight = we.weight + distU;
+				// new vertex or found shorter path?
+				if (!visited[we.v] || (distV > pathWeight)) {
+					visited[we.v] = true;
+					// update the distance to this vertex
+					distances[we.v] = pathWeight;
+					// update the edge on the shortest path to this vertex
+					pathMap.put(we.v, we);
+					// explore it in the future
+					pq.offer(new DijkstraNode(we.v, pathWeight));
+				}
+			}
+		}
+
+		return new DijkstraResult(distances, pathMap);
+	}
+
+	// Helper function to get easier access to dijkstra results
+	public Map<V, Double> distanceArrayToDistanceMap(double[] distances) {
+		HashMap<V, Double> distanceMap = new HashMap<>();
+		for (int i = 0; i < distances.length; i++) {
+			distanceMap.put(vertexAt(i), distances[i]);
+		}
+		return distanceMap;
+	}
+
+	// Takes a map of edges to reach each node and return a list of
+	// edges that goes from *start* to *end*
+	public static List<WeightedEdge> pathMapToPath(int start, int end, Map<Integer, WeightedEdge> pathMap) {
+		if (pathMap.size() == 0) {
+			return List.of();
+		}
+		LinkedList<WeightedEdge> path = new LinkedList<>();
+		WeightedEdge edge = pathMap.get(end);
+		path.add(edge);
+		while (edge.u != start) {
+			edge = pathMap.get(edge.u);
+			path.add(edge);
+		}
+		Collections.reverse(path);
+		return path;
 	}
 
 	// Test basic Graph construction
@@ -73,6 +211,23 @@ public class WeightedGraph<V> extends Graph<V, WeightedEdge> {
 		cityGraph2.addEdge("Philadelphia", "Washington", 123);
 
 		System.out.println(cityGraph2);
+
+		List<WeightedEdge> mst = cityGraph2.mst(0);
+		cityGraph2.printWeightedPath(mst);
+
+		System.out.println(); // spacing
+
+		DijkstraResult dijkstraResult = cityGraph2.dijkstra("Los Angeles");
+		Map<String, Double> nameDistance = cityGraph2.distanceArrayToDistanceMap(dijkstraResult.distances);
+		System.out.println("Distances from Los Angeles:");
+		nameDistance.forEach((name, distance) -> System.out.println(name + " : " + distance));
+
+		System.out.println(); // spacing
+
+		System.out.println("Shortest path from Los Angeles to Boston:");
+		List<WeightedEdge> path = pathMapToPath(cityGraph2.indexOf("Los Angeles"), cityGraph2.indexOf("Boston"),
+				dijkstraResult.pathMap);
+		cityGraph2.printWeightedPath(path);
 	}
 
 }
