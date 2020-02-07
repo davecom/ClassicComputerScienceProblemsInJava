@@ -1,3 +1,19 @@
+// WeightedGraph.java
+// From Classic Computer Science Problems in Java Chapter 4
+// Copyright 2020 David Kopec
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package chapter4;
 
 import java.util.Arrays;
@@ -52,7 +68,10 @@ public class WeightedGraph<V> extends Graph<V, WeightedEdge> {
 	// *start* is the vertex index to start the search at
 	public List<WeightedEdge> mst(int start) {
 		LinkedList<WeightedEdge> result = new LinkedList<>(); // final mst
-		PriorityQueue<WeightedEdge> pq = new PriorityQueue();
+		if (start < 0 || start > (getVertexCount() - 1)) {
+			return result;
+		}
+		PriorityQueue<WeightedEdge> pq = new PriorityQueue<>();
 		boolean[] visited = new boolean[getVertexCount()]; // where we've been
 
 		// this is like a "visit" inner function
@@ -133,6 +152,7 @@ public class WeightedGraph<V> extends Graph<V, WeightedEdge> {
 			for (WeightedEdge we : edgesOf(u)) {
 				// the old distance to this vertex
 				double distV = distances[we.v];
+				// the new distance to this vertex
 				double pathWeight = we.weight + distU;
 				// new vertex or found shorter path?
 				if (!visited[we.v] || (distV > pathWeight)) {
