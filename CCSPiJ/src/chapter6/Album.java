@@ -50,8 +50,10 @@ public class Album extends DataPoint {
 		KMeans<Album> kmeans = new KMeans<>(2, albums);
 		List<KMeans<Album>.Cluster> clusters = kmeans.run(100);
 		for (int clusterIndex = 0; clusterIndex < clusters.size(); clusterIndex++) {
-			System.out.println("Cluster " + clusterIndex + ": "
-					+ clusters.get(clusterIndex).points);
+			System.out.println("Cluster " + clusterIndex + " Avg Length " +
+					clusters.get(clusterIndex).centroid.dimensions.get(0) +
+					" Avg Tracks " + clusters.get(clusterIndex).centroid.dimensions.get(1)
+					+ ": " + clusters.get(clusterIndex).points);
 		}
 	}
 
