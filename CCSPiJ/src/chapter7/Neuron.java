@@ -19,9 +19,10 @@ package chapter7;
 import java.util.function.DoubleUnaryOperator;
 
 public class Neuron {
-	private double[] weights;
+	public double[] weights;
 	public final double learningRate;
 	public double outputCache;
+	public double delta;
 	public final DoubleUnaryOperator activationFunction;
 	public final DoubleUnaryOperator derivativeActivationFunction;
 
@@ -30,6 +31,7 @@ public class Neuron {
 		this.weights = weights;
 		this.learningRate = learningRate;
 		outputCache = 0.0;
+		delta = 0.0;
 		this.activationFunction = activationFunction;
 		this.derivativeActivationFunction = derivativeActivationFunction;
 	}
