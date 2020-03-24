@@ -23,9 +23,9 @@ import java.util.Random;
 import java.util.function.DoubleUnaryOperator;
 
 public class Layer {
-	private Optional<Layer> previousLayer;
-	private List<Neuron> neurons;
-	private double[] outputCache;
+	public Optional<Layer> previousLayer;
+	public List<Neuron> neurons;
+	public double[] outputCache;
 
 	public Layer(Optional<Layer> previousLayer, int numNeurons, double learningRate,
 			DoubleUnaryOperator activationFunction, DoubleUnaryOperator derivativeActivationFunction) {
