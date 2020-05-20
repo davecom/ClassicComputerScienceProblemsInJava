@@ -21,6 +21,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class C4Board implements Board<Integer> {
+	public static final int NUM_COLUMNS = 7;
+	public static final int NUM_ROWS = 6;
+	public static final int SEGMENT_LENGTH = 4;
+	public static final ArrayList<C4Location[]> SEGMENTS = generateSegments();
+
 	// generate all of the segments for a given board
 	// this static method is only run once
 	private static ArrayList<C4Location[]> generateSegments() {
@@ -69,11 +74,6 @@ public class C4Board implements Board<Integer> {
 		return segments;
 	}
 
-	public static final int NUM_COLUMNS = 7;
-	public static final int NUM_ROWS = 6;
-	public static final int SEGMENT_LENGTH = 4;
-	public static final ArrayList<C4Location[]> SEGMENTS = generateSegments();
-
 	private C4Piece[][] position; // column first, then row
 	private int[] columnCount; // number of pieces in each column
 	private C4Piece turn;
@@ -89,7 +89,6 @@ public class C4Board implements Board<Integer> {
 		turn = C4Piece.B; // black goes first
 	}
 
-	// Constructor for test cases
 	public C4Board(C4Piece[][] position, C4Piece turn) {
 		this.position = position;
 		columnCount = new int[NUM_COLUMNS];

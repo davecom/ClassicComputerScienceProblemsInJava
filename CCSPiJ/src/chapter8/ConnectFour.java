@@ -45,7 +45,7 @@ public class ConnectFour {
 				System.out.println("Draw!");
 				break;
 			}
-			Integer computerMove = Minimax.findBestMove(board, 5);
+			Integer computerMove = Minimax.findBestMove(board, 7);
 			System.out.println("Computer move is " + computerMove);
 			board = board.move(computerMove);
 			System.out.println(board);

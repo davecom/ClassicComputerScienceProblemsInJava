@@ -57,7 +57,6 @@ public class Minimax {
 	}
 
 	// Helper that sets alpha and beta for the first call
-	// and sets maxDepth to the default
 	public static <Move> double alphabeta(Board<Move> board, boolean maximizing, Piece originalPlayer, int maxDepth) {
 		return alphabeta(board, maximizing, originalPlayer, maxDepth, Double.NEGATIVE_INFINITY,
 				Double.POSITIVE_INFINITY);
