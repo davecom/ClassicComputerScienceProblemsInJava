@@ -40,11 +40,10 @@ public class MCState {
 
 	@Override
 	public String toString() {
-		return String.format("On the west bank there are %d missionaries and %d cannibals."
-				+ System.lineSeparator()
-				+ "On the east bank there are %d missionaries and %d cannibals."
-				+ System.lineSeparator()
-				+ "The boat is on the %s bank.",
+		return String.format(
+				"On the west bank there are %d missionaries and %d cannibals.%n"
+						+ "On the east bank there are %d missionaries and %d cannibals.%n"
+						+ "The boat is on the %s bank.",
 				wm, wc, em, ec,
 				boat ? "west" : "east");
 	}

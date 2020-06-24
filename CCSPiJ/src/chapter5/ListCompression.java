@@ -102,13 +102,15 @@ public class ListCompression extends Chromosome<ListCompression> {
 		System.out.println(originalOrder);
 		ArrayList<ListCompression> initialPopulation = new ArrayList<>();
 		final int POPULATION_SIZE = 100;
+		final int GENERATIONS = 100;
+		final double THRESHOLD = 1.0;
 		for (int i = 0; i < POPULATION_SIZE; i++) {
 			initialPopulation.add(ListCompression.randomInstance());
 		}
 		GeneticAlgorithm<ListCompression> ga = new GeneticAlgorithm<>(
 				initialPopulation,
 				0.2, 0.7, GeneticAlgorithm.SelectionType.TOURNAMENT);
-		ListCompression result = ga.run(100, 1.0);
+		ListCompression result = ga.run(GENERATIONS, THRESHOLD);
 		System.out.println(result);
 	}
 }
