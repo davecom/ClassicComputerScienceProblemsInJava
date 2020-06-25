@@ -4,7 +4,7 @@ This repository contains source code to accompany the book *Classic Computer Sci
 ![Classic Computer Science Problems in Python Cover](cover.jpg)
 
 ## Conventions
-The source code was written against version 11 of the Java language and should run on any known newer version at the time of publication. It makes use of no Java libraries beyond the standard library. It was developed in Eclipse and this folder can be opened as an Eclipse workspace. You can then right-click any file with a `main()` method to compile and execute it. It should be possible to import the packages for each chapter into the IDE of your choice as well.
+The source code was written against version 11 of the Java language and should run on any known newer version at the time of publication. It makes use of no Java libraries beyond the standard library. It was developed in Eclipse and this folder can be opened as an Eclipse workspace. You can then right-click any file with a `main()` method and select "Run" to compile and execute it. It should be possible to import the packages for each chapter into the IDE of your choice as well.
 
 ## License
 All of the source code in this repository is released under the Apache License version 2.0. See `LICENSE`.
