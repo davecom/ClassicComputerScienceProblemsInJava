@@ -19,6 +19,7 @@ package chapter1;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("boxing")
 public class Fib3 {
 
 	// Map.of() was introduced in Java 9 but returns
@@ -36,7 +37,7 @@ public class Fib3 {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(Fib3.fib3(5));
-		System.out.println(Fib3.fib3(40));
+		System.out.println(fib3(5));
+		System.out.println(fib3(40));
 	}
 }

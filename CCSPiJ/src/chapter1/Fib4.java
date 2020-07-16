@@ -29,7 +29,7 @@ public class Fib4 {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(Fib4.fib4(5));
-		System.out.println(Fib4.fib4(40));
+		System.out.println(fib4(5));
+		System.out.println(fib4(40));
 	}
 }
