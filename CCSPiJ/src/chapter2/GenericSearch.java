@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
@@ -31,7 +32,7 @@ import java.util.function.ToDoubleFunction;
 
 public class GenericSearch {
 
-	public static <T extends Comparable<T>> boolean linearContains(List<T> list, T key) {
+	public static <T extends Comparable<? super T>> boolean linearContains(List<T> list, T key) {
 		for (T item : list) {
 			if (item.compareTo(key) == 0) {
 				return true; // found a match
@@ -41,7 +42,7 @@ public class GenericSearch {
 	}
 
 	// assumes *list* is already sorted
-	public static <T extends Comparable<T>> boolean binaryContains(List<T> list, T key) {
+	public static <T extends Comparable<? super T>> boolean binaryContains(List<T> list, T key) {
 		int low = 0;
 		int high = list.size() - 1;
 		while (low <= high) { // while there is still a search space
@@ -161,7 +162,7 @@ public class GenericSearch {
 		PriorityQueue<Node<T>> frontier = new PriorityQueue<>();
 		frontier.offer(new Node<>(initial, null, 0.0, heuristic.applyAsDouble(initial)));
 		// explored is where we've been
-		HashMap<T, Double> explored = new HashMap<>();
+		Map<T, Double> explored = new HashMap<>();
 		explored.put(initial, 0.0);
 		// keep going while there is more to explore
 		while (!frontier.isEmpty()) {
@@ -186,9 +187,9 @@ public class GenericSearch {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(GenericSearch.linearContains(List.of(1, 5, 15, 15, 15, 15, 20), 5)); // true
-		System.out.println(GenericSearch.binaryContains(List.of("a", "d", "e", "f", "z"), "f")); // true
-		System.out.println(GenericSearch.binaryContains(List.of("john", "mark", "ronald", "sarah"), "sheila")); // false
+		System.out.println(linearContains(List.of(1, 5, 15, 15, 15, 15, 20), 5)); // true
+		System.out.println(binaryContains(List.of("a", "d", "e", "f", "z"), "f")); // true
+		System.out.println(binaryContains(List.of("john", "mark", "ronald", "sarah"), "sheila")); // false
 	}
 
 }

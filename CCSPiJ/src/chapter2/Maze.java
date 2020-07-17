@@ -25,23 +25,21 @@ import chapter2.GenericSearch.Node;
 public class Maze {
 
 	public enum Cell {
-		EMPTY, BLOCKED, START, GOAL, PATH;
+		EMPTY(" "),
+		BLOCKED("X"),
+		START("S"),
+		GOAL("G"),
+		PATH("*");
+
+		private final String code;
+
+		private Cell(String c) {
+			code = c;
+		}
 
 		@Override
 		public String toString() {
-			switch (this) {
-			case EMPTY:
-				return (" ");
-			case BLOCKED:
-				return ("X");
-			case START:
-				return ("S");
-			case GOAL:
-				return ("G");
-			case PATH:
-				return ("*");
-			}
-			return null; // should never get here
+			return code;
 		}
 	}
 
