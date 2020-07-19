@@ -24,12 +24,11 @@ import java.util.Map;
 public class CSP<V, D> {
 	private List<V> variables;
 	private Map<V, List<D>> domains;
-	private Map<V, List<Constraint<V, D>>> constraints;
+	private Map<V, List<Constraint<V, D>>> constraints = new HashMap<>();
 
 	public CSP(List<V> variables, Map<V, List<D>> domains) {
 		this.variables = variables;
 		this.domains = domains;
-		constraints = new HashMap<>();
 		for (V variable : variables) {
 			constraints.put(variable, new ArrayList<>());
 			if (!domains.containsKey(variable)) {
@@ -42,9 +41,8 @@ public class CSP<V, D> {
 		for (V variable : constraint.variables) {
 			if (!variables.contains(variable)) {
 				throw new IllegalArgumentException("Variable in constraint not in CSP");
-			} else {
-				constraints.get(variable).add(constraint);
 			}
+			constraints.get(variable).add(constraint);
 		}
 	}
 
@@ -65,7 +63,7 @@ public class CSP<V, D> {
 			return assignment;
 		}
 		// get the first variable in the CSP but not in the assignment
-		V unassigned = variables.stream().filter(v -> (!assignment.containsKey(v))).findFirst().get();
+		V unassigned = variables.stream().filter(v -> !assignment.containsKey(v)).findFirst().get();
 		// get the every possible domain value of the first unassigned variable
 		for (D value : domains.get(unassigned)) {
 			// shallow copy of assignment that we can change
