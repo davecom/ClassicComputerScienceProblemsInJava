@@ -127,7 +127,7 @@ public class Maze {
 		StringBuilder sb = new StringBuilder();
 		for (Cell[] row : grid) {
 			for (Cell cell : row) {
-				sb.append(cell.toString());
+				sb.append(cell);
 			}
 			sb.append(System.lineSeparator());
 		}
