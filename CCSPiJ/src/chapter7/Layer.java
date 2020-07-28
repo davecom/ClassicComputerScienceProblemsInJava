@@ -24,17 +24,16 @@ import java.util.function.DoubleUnaryOperator;
 
 public class Layer {
 	public Optional<Layer> previousLayer;
-	public List<Neuron> neurons;
+	public List<Neuron> neurons = new ArrayList<>();
 	public double[] outputCache;
 
 	public Layer(Optional<Layer> previousLayer, int numNeurons, double learningRate,
 			DoubleUnaryOperator activationFunction, DoubleUnaryOperator derivativeActivationFunction) {
 		this.previousLayer = previousLayer;
-		neurons = new ArrayList<>();
+		Random random = new Random();
 		for (int i = 0; i < numNeurons; i++) {
 			double[] randomWeights = null;
 			if (previousLayer.isPresent()) {
-				Random random = new Random();
 				randomWeights = random.doubles(previousLayer.get().neurons.size()).toArray();
 			}
 			Neuron neuron = new Neuron(randomWeights, learningRate, activationFunction, derivativeActivationFunction);
@@ -63,7 +62,7 @@ public class Layer {
 	// should not be called on output layer
 	public void calculateDeltasForHiddenLayer(Layer nextLayer) {
 		for (int i = 0; i < neurons.size(); i++) {
-			final int index = i;
+			int index = i;
 			double[] nextWeights = nextLayer.neurons.stream().mapToDouble(n -> n.weights[index]).toArray();
 			double[] nextDeltas = nextLayer.neurons.stream().mapToDouble(n -> n.delta).toArray();
 			double sumWeightsAndDeltas = Util.dotProduct(nextWeights, nextDeltas);

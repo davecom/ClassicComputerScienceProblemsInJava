@@ -17,6 +17,7 @@
 package chapter7;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,19 +33,20 @@ public class WineTest {
 		Collections.shuffle(wineDataset);
 		for (String[] wine : wineDataset) {
 			// last thirteen items are parameters (doubles)
-			double[] parameters = new double[13];
-			for (int i = 1; i < (parameters.length + 1); i++) {
-				parameters[i - 1] = Double.parseDouble(wine[i]);
-			}
+			double[] parameters = Arrays.stream(wine)
+					.skip(1)
+					.mapToDouble(Double::parseDouble)
+					.toArray();
 			wineParameters.add(parameters);
 			// first item is species
 			int species = Integer.parseInt(wine[0]);
-			if (species == 1) {
-				wineClassifications.add(new double[] { 1.0, 0.0, 0.0 });
-			} else if (species == 2) {
-				wineClassifications.add(new double[] { 0.0, 1.0, 0.0 });
-			} else { // 3
-				wineClassifications.add(new double[] { 0.0, 0.0, 1.0 });
+			switch (species) {
+				case 1 :
+					wineClassifications.add(new double[] { 1.0, 0.0, 0.0 }); break;
+				case 2 :
+					wineClassifications.add(new double[] { 0.0, 1.0, 0.0 }); break;
+				default :
+					wineClassifications.add(new double[] { 0.0, 0.0, 1.0 });; break;
 			}
 			wineSpecies.add(species);
 		}
@@ -55,11 +57,11 @@ public class WineTest {
 		double max = Util.max(output);
 		if (max == output[0]) {
 			return 1;
-		} else if (max == output[1]) {
-			return 2;
-		} else {
-			return 3;
 		}
+		if (max == output[1]) {
+			return 2;
+		}
+		return 3;
 	}
 
 	public Network<Integer>.Results classify() {
