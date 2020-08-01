@@ -17,23 +17,28 @@
 package chapter1;
 
 import java.util.Stack;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Hanoi {
-	private final int NUM_DISCS;
+	private final int numDiscs;
 	public final Stack<Integer> towerA = new Stack<>();
 	public final Stack<Integer> towerB = new Stack<>();
 	public final Stack<Integer> towerC = new Stack<>();
 
-	public Hanoi(int numDiscs) {
-		NUM_DISCS = numDiscs;
-		for (int i = 1; i <= numDiscs; i++) {
-			towerA.push(i);
+	public Hanoi(int discs) {
+		numDiscs = discs;
+		for (int i = 1; i <= discs; i++) {
+			towerA.push(Integer.valueOf(i));
 		}
 	}
 
 	private void move(Stack<Integer> begin, Stack<Integer> end, Stack<Integer> temp, int n) {
 		if (n == 1) {
 			end.push(begin.pop());
+			System.out.println(Stream.of(towerA, towerB, towerC)
+			    .map(Stack::toString)
+			    .collect(Collectors.joining(" ")));
 		} else {
 			move(begin, temp, end, n - 1);
 			move(begin, end, temp, 1);
@@ -42,7 +47,7 @@ public class Hanoi {
 	}
 
 	public void solve() {
-		move(towerA, towerC, towerB, NUM_DISCS);
+		move(towerA, towerC, towerB, numDiscs);
 	}
 
 	public static void main(String[] args) {

@@ -25,6 +25,6 @@ public class Fib1 {
 
 	public static void main(String[] args) {
 		// Don't run this!
-		System.out.println(Fib1.fib1(5));
+		System.out.println(fib1(5));
 	}
 }
