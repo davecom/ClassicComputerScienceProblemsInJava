@@ -51,7 +51,7 @@ public class WeightedGraph<V> extends Graph<V, WeightedEdge> {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < getVertexCount(); i++) {
-			sb.append(vertexAt(i).toString());
+			sb.append(vertexAt(i));
 			sb.append(" -> ");
 			sb.append(Arrays.toString(edgesOf(i).stream()
 					.map(we -> "(" + vertexAt(we.v) + ", " + we.weight + ")").toArray()));

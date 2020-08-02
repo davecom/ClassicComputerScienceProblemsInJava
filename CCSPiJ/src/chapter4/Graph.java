@@ -25,18 +25,15 @@ import java.util.stream.Collectors;
 // E is the type of the edges
 public abstract class Graph<V, E extends Edge> {
 
-	private ArrayList<V> vertices;
-	protected ArrayList<ArrayList<E>> edges;
+	private ArrayList<V> vertices = new ArrayList<>();
+	protected ArrayList<ArrayList<E>> edges = new ArrayList<>();
 
 	public Graph() {
-		vertices = new ArrayList<>();
-		edges = new ArrayList<>();
 	}
 
 	public Graph(List<V> vertices) {
-		this.vertices = new ArrayList<>(vertices);
-		edges = new ArrayList<>();
-		for (V vertice : vertices) {
+		this.vertices.addAll(vertices);
+		for (V vertex : vertices) {
 			edges.add(new ArrayList<>());
 		}
 	}
@@ -95,7 +92,7 @@ public abstract class Graph<V, E extends Edge> {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < getVertexCount(); i++) {
-			sb.append(vertexAt(i).toString());
+			sb.append(vertexAt(i));
 			sb.append(" -> ");
 			sb.append(Arrays.toString(neighborsOf(i).toArray()));
 			sb.append(System.lineSeparator());
