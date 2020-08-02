@@ -39,10 +39,18 @@ public class SendMoreMoneyConstraint extends Constraint<Character, Integer> {
 		// if all variables have been assigned, check if it adds correctly
 		if (assignment.size() == letters.size()) {
 			int s = assignment.get('S');
+			// so we don't get answers starting with a 0
+			if (s == 0) {
+				return false;
+			}
 			int e = assignment.get('E');
 			int n = assignment.get('N');
 			int d = assignment.get('D');
 			int m = assignment.get('M');
+			// so we don't get answers starting with a 0
+			if (m == 0) {
+				return false;
+			}
 			int o = assignment.get('O');
 			int r = assignment.get('R');
 			int y = assignment.get('Y');
@@ -60,8 +68,6 @@ public class SendMoreMoneyConstraint extends Constraint<Character, Integer> {
 		for (Character letter : letters) {
 			possibleDigits.put(letter, List.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
 		}
-		// so we don't get answers starting with a 0
-		possibleDigits.replace('M', List.of(1));
 		CSP<Character, Integer> csp = new CSP<>(letters, possibleDigits);
 		csp.addConstraint(new SendMoreMoneyConstraint(letters));
 		Map<Character, Integer> solution = csp.backtrackingSearch();
