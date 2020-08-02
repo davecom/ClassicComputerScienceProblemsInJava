@@ -24,11 +24,11 @@ import chapter2.GenericSearch.Node;
 
 public class MCState {
 	private static final int MAX_NUM = 3;
-	final private int wm; // west bank missionaries
-	final private int wc; // west bank cannibals
-	final private int em; // east bank missionaries
-	final private int ec; // east bank cannibals
-	final private boolean boat; // is boat on west bank?
+	private final int wm; // west bank missionaries
+	private final int wc; // west bank cannibals
+	private final int em; // east bank missionaries
+	private final int ec; // east bank cannibals
+	private final boolean boat; // is boat on west bank?
 
 	public MCState(int missionaries, int cannibals, boolean boat) {
 		wm = missionaries;
@@ -109,13 +109,11 @@ public class MCState {
 		System.out.println(oldState);
 		for (MCState currentState : path.subList(1, path.size())) {
 			if (currentState.boat) {
-				System.out.printf("%d missionaries and %d cannibals moved from the east bank to the west bank." +
-						System.lineSeparator(),
+				System.out.printf("%d missionaries and %d cannibals moved from the east bank to the west bank.%n",
 						oldState.em - currentState.em,
 						oldState.ec - currentState.ec);
 			} else {
-				System.out.printf("%d missionaries and %d cannibals moved from the west bank to the east bank." +
-						System.lineSeparator(),
+				System.out.printf("%d missionaries and %d cannibals moved from the west bank to the east bank.%n",
 						oldState.wm - currentState.wm,
 						oldState.wc - currentState.wc);
 			}
