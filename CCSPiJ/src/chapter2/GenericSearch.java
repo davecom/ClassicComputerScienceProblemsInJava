@@ -32,7 +32,7 @@ import java.util.function.ToDoubleFunction;
 
 public class GenericSearch {
 
-	public static <T extends Comparable<? super T>> boolean linearContains(List<T> list, T key) {
+	public static <T extends Comparable<T>> boolean linearContains(List<T> list, T key) {
 		for (T item : list) {
 			if (item.compareTo(key) == 0) {
 				return true; // found a match
@@ -42,7 +42,7 @@ public class GenericSearch {
 	}
 
 	// assumes *list* is already sorted
-	public static <T extends Comparable<? super T>> boolean binaryContains(List<T> list, T key) {
+	public static <T extends Comparable<T>> boolean binaryContains(List<T> list, T key) {
 		int low = 0;
 		int high = list.size() - 1;
 		while (low <= high) { // while there is still a search space
@@ -117,7 +117,7 @@ public class GenericSearch {
 	}
 
 	public static <T> List<T> nodeToPath(Node<T> node) {
-		ArrayList<T> path = new ArrayList<>();
+		List<T> path = new ArrayList<>();
 		path.add(node.state);
 		// work backwards from end to front
 		while (node.parent != null) {
