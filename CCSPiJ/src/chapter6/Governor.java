@@ -92,8 +92,7 @@ public class Governor extends DataPoint {
 		KMeans<Governor> kmeans = new KMeans<>(2, governors);
 		List<KMeans<Governor>.Cluster> govClusters = kmeans.run(100);
 		for (int clusterIndex = 0; clusterIndex < govClusters.size(); clusterIndex++) {
-			System.out.println("Cluster " + clusterIndex + ": "
-					+ govClusters.get(clusterIndex).points);
+			System.out.printf("Cluster %d: %s%n", clusterIndex, govClusters.get(clusterIndex).points);
 		}
 	}
 

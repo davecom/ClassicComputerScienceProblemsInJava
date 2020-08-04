@@ -117,7 +117,7 @@ public class KMeans<Point extends DataPoint> {
 			}
 			List<Double> means = new ArrayList<>();
 			for (int i = 0; i < cluster.points.get(0).numDimensions; i++) {
-				final int dimension = i; // needed to use in scope of closure
+				int dimension = i; // needed to use in scope of closure
 				Double dimensionMean = cluster.points.stream()
 						.mapToDouble(x -> x.dimensions.get(dimension)).average().getAsDouble();
 				means.add(dimensionMean);
