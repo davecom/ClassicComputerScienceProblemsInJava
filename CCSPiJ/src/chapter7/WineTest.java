@@ -41,12 +41,16 @@ public class WineTest {
 			// first item is species
 			int species = Integer.parseInt(wine[0]);
 			switch (species) {
-				case 1 :
-					wineClassifications.add(new double[] { 1.0, 0.0, 0.0 }); break;
-				case 2 :
-					wineClassifications.add(new double[] { 0.0, 1.0, 0.0 }); break;
-				default :
-					wineClassifications.add(new double[] { 0.0, 0.0, 1.0 });; break;
+			case 1:
+				wineClassifications.add(new double[] { 1.0, 0.0, 0.0 });
+				break;
+			case 2:
+				wineClassifications.add(new double[] { 0.0, 1.0, 0.0 });
+				break;
+			default:
+				wineClassifications.add(new double[] { 0.0, 0.0, 1.0 });
+				;
+				break;
 			}
 			wineSpecies.add(species);
 		}
@@ -57,11 +61,11 @@ public class WineTest {
 		double max = Util.max(output);
 		if (max == output[0]) {
 			return 1;
-		}
-		if (max == output[1]) {
+		} else if (max == output[1]) {
 			return 2;
+		} else {
+			return 3;
 		}
-		return 3;
 	}
 
 	public Network<Integer>.Results classify() {

@@ -46,7 +46,12 @@ public class Network<T> {
 	// Pushes input data to the first layer, then output from the first
 	// as input to the second, second to the third, etc.
 	private double[] outputs(double[] input) {
-		return layers.stream().reduce(input, (r, l) -> l.outputs(r), (r1, r2) -> r1);
+		double[] result = input;
+		for (Layer layer : layers) {
+			result = layer.outputs(result);
+		}
+		return result;
+
 	}
 
 	// Figure out each neuron's changes based on the errors of the output

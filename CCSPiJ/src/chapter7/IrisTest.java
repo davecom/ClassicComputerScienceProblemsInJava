@@ -45,12 +45,15 @@ public class IrisTest {
 			// last item is species
 			String species = iris[4];
 			switch (species) {
-				case IRIS_SETOSA :
-					irisClassifications.add(new double[] { 1.0, 0.0, 0.0 }); break;
-				case IRIS_VERSICOLOR :
-					irisClassifications.add(new double[] { 0.0, 1.0, 0.0 }); break;
-				default :
-					irisClassifications.add(new double[] { 0.0, 0.0, 1.0 }); break;
+			case IRIS_SETOSA:
+				irisClassifications.add(new double[] { 1.0, 0.0, 0.0 });
+				break;
+			case IRIS_VERSICOLOR:
+				irisClassifications.add(new double[] { 0.0, 1.0, 0.0 });
+				break;
+			default:
+				irisClassifications.add(new double[] { 0.0, 0.0, 1.0 });
+				break;
 			}
 			irisSpecies.add(species);
 		}
@@ -61,11 +64,11 @@ public class IrisTest {
 		double max = Util.max(output);
 		if (max == output[0]) {
 			return IRIS_SETOSA;
-		}
-		if (max == output[1]) {
+		} else if (max == output[1]) {
 			return IRIS_VERSICOLOR;
+		} else {
+			return IRIS_VIRGINICA;
 		}
-		return IRIS_VIRGINICA;
 	}
 
 	public Network<String>.Results classify() {
