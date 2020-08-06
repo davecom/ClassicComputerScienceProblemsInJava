@@ -65,14 +65,14 @@ public class TTTBoard implements Board<Integer> {
 	@Override
 	public boolean isWin() {
 		// three row, three column, and then two diagonal checks
-		return position[0] == position[1] && position[0] == position[2] && position[0] != TTTPiece.E ||
-				position[3] == position[4] && position[3] == position[5] && position[3] != TTTPiece.E ||
-				position[6] == position[7] && position[6] == position[8] && position[6] != TTTPiece.E ||
-				position[0] == position[3] && position[0] == position[6] && position[0] != TTTPiece.E ||
-				position[1] == position[4] && position[1] == position[7] && position[1] != TTTPiece.E ||
-				position[2] == position[5] && position[2] == position[8] && position[2] != TTTPiece.E ||
-				position[0] == position[4] && position[0] == position[8] && position[0] != TTTPiece.E ||
-				position[2] == position[4] && position[2] == position[6] && position[2] != TTTPiece.E;
+		return checkPos(0, 1, 2) || checkPos(3, 4, 5) || checkPos(6, 7, 8)
+				|| checkPos(0, 3, 6) || checkPos(1, 4, 7) || checkPos(2, 5, 8)
+				|| checkPos(0, 4, 8) || checkPos(2, 4, 6);
+	}
+
+	private boolean checkPos(int p0, int p1, int p2) {
+		return position[p0] == position[p1] && position[p0] == position[p2]
+				&& position[p0] != TTTPiece.E;
 	}
 
 	@Override

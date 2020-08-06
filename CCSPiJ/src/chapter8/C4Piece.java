@@ -21,11 +21,12 @@ public enum C4Piece implements Piece {
 
 	@Override
 	public C4Piece opposite() {
-		if (this == C4Piece.B) {
+		switch (this) {
+		case B:
 			return C4Piece.R;
-		} else if (this == C4Piece.R) {
+		case R:
 			return C4Piece.B;
-		} else {
+		default: // E, empty
 			return C4Piece.E;
 		}
 	}

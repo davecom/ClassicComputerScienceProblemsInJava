@@ -28,7 +28,7 @@ public interface Board<Move> {
 	boolean isWin();
 
 	default boolean isDraw() {
-		return (!isWin() && (getLegalMoves().size() == 0));
+		return !isWin() && getLegalMoves().isEmpty();
 	}
 
 	double evaluate(Piece player);

@@ -21,11 +21,12 @@ public enum TTTPiece implements Piece {
 
 	@Override
 	public TTTPiece opposite() {
-		if (this == TTTPiece.X) {
+		switch (this) {
+		case X:
 			return TTTPiece.O;
-		} else if (this == TTTPiece.O) {
+		case O:
 			return TTTPiece.X;
-		} else {
+		default: // E, empty
 			return TTTPiece.E;
 		}
 	}
