@@ -78,9 +78,9 @@ public final class Knapsack {
 		items.add(new Item("painting", 10, 1000));
 		List<Item> toSteal = knapsack(items, 75);
 		System.out.println("The best items for the thief to steal are:");
-		System.out.printf("%-15.15s %-15.15s %-15.15s\n", "Name", "Weight", "Value");
+		System.out.printf("%-15.15s %-15.15s %-15.15s%n", "Name", "Weight", "Value");
 		for (Item item : toSteal) {
-			System.out.printf("%-15.15s %-15.15s %-15.15s\n", item.name, item.weight, item.value);
+			System.out.printf("%-15.15s %-15.15s %-15.15s%n", item.name, item.weight, item.value);
 		}
 	}
 
