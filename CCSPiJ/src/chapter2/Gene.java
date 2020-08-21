@@ -49,7 +49,7 @@ public class Gene {
 	private ArrayList<Codon> codons = new ArrayList<>();
 
 	public Gene(String geneStr) {
-		for (int i = 0; i < geneStr.length() - 3; i++) {
+		for (int i = 0; i < geneStr.length() - 3; i += 3) {
 			// Take every 3 characters in the String and form a Codon
 			codons.add(new Codon(geneStr.substring(i, i + 3)));
 		}
