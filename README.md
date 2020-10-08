@@ -4,7 +4,7 @@ This repository contains source code to accompany the book *Classic Computer Sci
 ![Classic Computer Science Problems in Python Cover](cover.jpg)
 
 ## Conventions
-The source code was written against version 11 of the Java language and should run on any known newer version at the time of publication. It makes use of no Java libraries beyond the standard library. It was developed in Eclipse and this folder can be opened as an Eclipse workspace. You can then right-click any file with a `main()` method and select "Run" to compile and execute it. It should be possible to import the packages for each chapter into the IDE of your choice as well.
+The source code was written against version 11 of the Java language and should run on any known newer version at the time of publication. It makes use of no Java libraries beyond the standard library. It was developed in Eclipse and this folder can be opened as an Eclipse workspace. You can then right-click any file with a `main()` method and select "Run" to compile and execute it. All other popular Java IDEs can import Eclipse projects, but you can also easily create a project out of each chapter, which is bundled as a Java package. For directions importing Eclipse projects into IntelliJ see [this tutorial from Jetbrains.](https://www.jetbrains.com/help/idea/import-project-from-eclipse-page-1.html)
 
 ## Questions about the Book
 You can find general questions and descriptive information about the book on the [Classic Computer Science Problems](https://classicproblems.com/) website. Also, feel free to reach out to me on Twitter, [@davekopec](https://twitter.com/davekopec). If you think you found an error in the source code, please open an issue up here on GitHub.
