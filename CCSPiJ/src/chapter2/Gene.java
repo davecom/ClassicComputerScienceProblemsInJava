@@ -72,7 +72,7 @@ public class Gene {
 		int high = sortedCodons.size() - 1;
 		while (low <= high) { // while there is still a search space
 			int middle = (low + high) / 2;
-			int comparison = codons.get(middle).compareTo(key);
+			int comparison = sortedCodons.get(middle).compareTo(key);
 			if (comparison < 0) { // middle codon is less than key
 				low = middle + 1;
 			} else if (comparison > 0) { // middle codon is greater than key
